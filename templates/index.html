@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Добавить рамку</title>
+</head>
+<body>
+    <h1>Загрузите изображение</h1>
+    
+    <!-- Форма загрузки изображения -->
+    <form method="POST" enctype="multipart/form-data" action="/">
+        {{ form.hidden_tag() }} <!-- Скрытые поля (CSRF-токен) -->
+
+        <!-- Поле загрузки файла -->
+        {{ form.image.label }} {{ form.image }}<br><br>
+        
+        <!-- Поле размера рамки -->
+        {{ form.border_size.label }} {{ form.border_size }}
+        <input type="number" name="border_size" min="1" max="50" required><br><br>
+
+        <!-- Поле капчи -->
+        {{ form.i_am_human }} {{ form.i_am_human.label }}<br><br>
+
+        <!-- Кнопка отправки -->
+        {{ form.submit }}
+    </form>
+
+    <!-- Результаты после обработки -->
+    {% if result_image %}
+        <h2>Результат:</h2>
+        <img src="{{ result_image }}" alt="Изображение с рамкой"><br>
+        <img src="{{ histogram }}" alt="График распределения цветов">
+    {% endif %}
+</body>
+</html>
