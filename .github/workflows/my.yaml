@@ -1,0 +1,13 @@
+﻿name: CI Pipeline
+on: [push]
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.13"
+      - run: pip install pipenv && pipenv sync --dev
+      - run: pipenv run python -m pytest tests/
